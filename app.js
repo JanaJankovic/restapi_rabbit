@@ -95,9 +95,9 @@ app.post("/logs", async (req, res) => {
     await req.channel.ackAll();
     console.log(`Read all messages from ${process.env.QUEUE}`);
 
-    res.json({ message: "Saved all messages", error: false });
+    res.json({ content: "Saved all messages", error: false });
   } catch (err) {
-    res.json({ message: err, error: true });
+    res.json({ content: err, error: true });
   }
 });
 
@@ -113,7 +113,7 @@ app.get("/logs/:dateFrom/:dateTo", async (req, res) => {
     });
     res.json(logs);
   } catch (err) {
-    res.json({ message: err, error: true });
+    res.json({ content: err, error: true });
   }
 });
 
@@ -121,11 +121,11 @@ app.delete("/logs", async (req, res) => {
   try {
     const deleteResult = await Logs.deleteMany();
     res.json({
-      message: `Deleted ${deleteResult.deletedCount} documents`,
+      content: `Deleted ${deleteResult.deletedCount} documents`,
       error: false,
     });
   } catch (err) {
-    res.json({ message: err, error: true });
+    res.json({ content: err, error: true });
   }
 });
 /*API END POINTS---------------------------------------------------------------------- */
