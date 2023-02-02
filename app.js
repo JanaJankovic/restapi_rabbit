@@ -14,6 +14,7 @@ var allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:3001",
   "http://localhost:3002",
+  "http://studentdocker.informatika.uni-mb.si:3742",
 ];
 
 app.use(
@@ -31,6 +32,19 @@ app.use(
     },
   })
 );
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    return res.status(200).json({});
+  }
+  next();
+});
 /**CORS ERRORS------------------------------------------- */
 
 //mongoose
